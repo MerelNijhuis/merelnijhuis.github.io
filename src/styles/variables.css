@@ -1,0 +1,37 @@
+:root {
+  /* Colors */
+  --color-bg: #fffaf2;
+  --color-text: #17131f;
+  --color-muted: #716b78;
+
+  --color-purple: #7c3aed;
+  --color-blue: #2563eb;
+  --color-coral: #ff6b5f;
+  --color-lime: #c7f36b;
+  --color-yellow: #ffd84d;
+
+  --color-white: #ffffff;
+
+  /* Typography */
+  --font-display: "DM Sans", sans-serif;;
+  --font-body: "DM Sans", sans-serif;
+  --font-logo: "Rock Salt", cursive;
+
+  /* Layout */
+  --container-width: 1200px;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
+
+  /* Borders */
+  --border-color: rgba(23, 19, 31, 0.12);
+  --border-radius: 24px;
+  --border-radius-small: 12px;
+
+  /* Effects */
+  --shadow-soft: 0 20px 60px rgba(23, 19, 31, 0.08);
+}
