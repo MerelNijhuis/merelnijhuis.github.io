@@ -4,6 +4,11 @@
 /* DM Sans: Body */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
+@font-face {
+    font-family: Mayur;
+    src: url("@/assets/fonts/Mayur-Regular.otf") format("opentype");
+}
+
 * {
   box-sizing: border-box;
 }
@@ -12,11 +17,16 @@ html {
   scroll-behavior: smooth;
 }
 
+#app {
+  min-height: 100vh;
+}
+
 body {
   margin: 0;
+  padding: 0;
 
-  background: var(--color-bg);
-  color: var(--color-text);
+  /* background: var(--color-bg);
+  color: var(--color-text); */
 
   font-family: var(--font-body);
   line-height: 1.5;
@@ -37,11 +47,11 @@ img {
   max-width: 100%;
 }
 
-section {
+/* section {
   width: min(
     calc(100% - 3rem),
     var(--container-width)
   );
 
   margin-inline: auto;
-}
+} */
