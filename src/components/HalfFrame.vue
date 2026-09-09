@@ -45,6 +45,8 @@
 // Vite will handle the import path resolution for you.
 import heroImage from '@/assets/Cyanotype.png'
 
+// heroImage: str = "src/assets/Cyanotype.png";
+
 const links = [
   { label: 'Email', href: 'mailto:jane@example.com' },
   { label: 'About', href: 'https://github.com/janedoe' },
