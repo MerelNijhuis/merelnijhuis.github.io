@@ -2,31 +2,43 @@
   <div class="poster">
     <!-- LEFT / TOP: info -->
     <section class="info">
-      <div class="info__inner">
-        <p class="info__eyebrow">Portfolio — 2026</p>
-
-        <h1 class="info__name">
+      <div class="info_inner">
+        <h1 class="info_name">
           Merel<br />Nijhuis
         </h1>
 
-        <p class="info__role">Creative Writer &amp; Certified Pookie</p>
+        <p class="info_role">{{ t.main }}</p>
 
-        <p class="info__blurb">
-            Gallo, Giboogaboo, Abooboo
+        <p class="info_desc">
+            {{ t.subtext }}
         </p>
 
-        <nav class="info__links" aria-label="Contact and social links">
+        <nav class="info_links" aria-label="Contact and social links">
           <a
             v-for="link in links"
             :key="link.label"
             :href="link.href"
-            class="info__link"
+            class="info_link"
             target="_blank"
             rel="noopener noreferrer"
           >
             {{ link.label }}
           </a>
         </nav>
+
+        <div class="locale-toggle" role="group" aria-label="Language selector">
+          <button
+            v-for="loc in available"
+            :key="loc"
+            type="button"
+            class="locale-toggle__btn"
+            :class="{ 'locale-toggle__btn--active': locale === loc }"
+            :aria-pressed="locale === loc"
+            @click="setLocale(loc)"
+          >
+            {{ loc.toUpperCase() }}
+          </button>
+        </div>
       </div>
     </section>
 
@@ -40,19 +52,26 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // Drop any image (any dimensions) into src/assets and point this at it.
 // Vite will handle the import path resolution for you.
 import heroImage from '@/assets/Cyanotype.png'
+import { computed } from 'vue';
+import { useLocale } from '../compose/UseLocale';
 
-// heroImage: str = "src/assets/Cyanotype.png";
+const { t, locale, setLocale, available } = useLocale()
 
-const links = [
-  { label: 'Email', href: 'mailto:jane@example.com' },
-  { label: 'About', href: 'https://github.com/janedoe' },
-  { label: 'Workies', href: 'https://linkedin.com/in/janedoe' },
-  { label: 'My Blog', href: '/resume.pdf' },
-]
+interface LinkItem {
+    label: string
+    href: string
+}
+
+const links = computed<LinkItem[]>(() => [
+  { label: t.value.links.email, href: 'mailto:jane@example.com' },
+  { label: t.value.links.about, href: 'https://github.com/janedoe' },
+  { label: t.value.links.work, href: 'https://linkedin.com/in/janedoe' },
+  { label: t.value.links.blog, href: '/resume.pdf' },
+])
 </script>
 
 <style scoped>
@@ -82,7 +101,7 @@ const links = [
   color: var(--ink);
 }
 
-.info__inner {
+.info_inner {
   max-width: 46ch;
 }
 
@@ -93,7 +112,7 @@ const links = [
   color: var(--accent);
 }
 
-.info__name {
+.info_name {
   font-family: 'Mayur';
   font-weight: 900;
   font-size: 7rem;
@@ -104,20 +123,20 @@ const links = [
   text-transform: lowercase;
 }
 
-.info__role {
+.info_role {
   font-size: 1rem;
   font-weight: 600;
   margin: 0 0 1.25rem;
 }
 
-.info__blurb {
+.info_desc {
   font-size: 0.92rem;
   line-height: 1.6;
   opacity: 0.85;
   margin: 0 0 3rem;
 }
 
-.info__links {
+.info_links {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -126,7 +145,7 @@ const links = [
   width: fit-content;
 }
 
-.info__link {
+.info_link {
   font-size: 0.95rem;
   font-weight: 500;
   padding: 0.6rem 0;
@@ -135,7 +154,7 @@ const links = [
   transition: color 0.15s ease;
 }
 
-.info__link::before {
+.info_link::before {
   content: '→';
   position: absolute;
   left: -1.4rem;
@@ -144,21 +163,58 @@ const links = [
   transform: translateX(-4px);
 }
 
-.info__link:hover,
-.info__link:focus-visible {
+.info_link:hover,
+.info_link:focus-visible {
   color: var(--accent);
 }
 
-.info__link:hover::before,
-.info__link:focus-visible::before {
+.info_link:hover::before,
+.info_link:focus-visible::before {
   opacity: 1;
   transform: translateX(0);
 }
 
-.info__link:focus-visible {
+.info_link:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
+
+.locale-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.locale-toggle__btn {
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  background: none;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  padding: 0.2rem 0.65rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.locale-toggle__btn:hover,
+.locale-toggle__btn:focus-visible {
+  opacity: 0.85;
+}
+
+.locale-toggle__btn--active {
+  opacity: 1;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.locale-toggle__btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 
 /* ---------- RULE ---------- */
 .rule {
@@ -207,7 +263,7 @@ const links = [
     padding: 9vw 7vw 5vw;
   }
 
-  .info__inner {
+  .info_inner {
     max-width: none;
   }
 
@@ -215,23 +271,23 @@ const links = [
     margin-bottom: 1.5rem;
   }
 
-  .info__name {
+  .info_name {
     margin-bottom: 1.25rem;
   }
 
-  .info__links {
+  .info_links {
     width: 100%;
   }
 
-  .info__link {
+  .info_link {
     padding: 0.9rem 0; /* larger tap target for touch */
     font-size: 1.05rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .info__link,
-  .info__link::before {
+  .info_link,
+  .info_link::before {
     transition: none;
   }
 }
