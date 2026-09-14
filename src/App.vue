@@ -1,14 +1,14 @@
 <script setup lang="ts">
+
     // import Navbar from './components/Navbar.vue';
     // import About from './components/About.vue';
     // import Hero from './components/Hero.vue';
     // import WorkSection from './components/WorkSection.vue';
     // import WorkCard from './components/WorkCard.vue';
-    import HalfFrame from './components/HalfFrame.vue';
 </script>
 
 <template>
-  <HalfFrame></HalfFrame>
+  <router-view></router-view>
 </template>
 
 <style>
