@@ -1,77 +1,9 @@
 <template>
-  <div class="poster">
-    <!-- LEFT / TOP: info -->
-    <section class="info">
-      <div class="info_inner">
-        <h1 class="info_name">
-          Merel<br />Nijhuis
-        </h1>
 
-        <p class="info_role">{{ t.main }}</p>
-
-        <p class="info_desc">
-            {{ t.subtext }}
-        </p>
-
-        <nav class="info_links" aria-label="Contact and social links">
-          <a
-            v-for="link in links"
-            :key="link.label"
-            :href="link.href"
-            class="info_link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {{ link.label }}
-          </a>
-        </nav>
-
-        <div class="locale-toggle" role="group" aria-label="Language selector">
-          <button
-            v-for="loc in available"
-            :key="loc"
-            type="button"
-            class="locale-toggle__btn"
-            :class="{ 'locale-toggle__btn--active': locale === loc }"
-            :aria-pressed="locale === loc"
-            @click="setLocale(loc)"
-          >
-            {{ loc.toUpperCase() }}
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- RULE -->
-    <div class="rule" aria-hidden="true"></div>
-
-    <!-- RIGHT / BOTTOM: image -->
-    <section class="visual">
-      <img :src="heroImage" alt="Portrait of Merel Nijhuis" class="visual__img" />
-    </section>
-  </div>
 </template>
 
 <script setup lang="ts">
-// Drop any image (any dimensions) into src/assets and point this at it.
-// Vite will handle the import path resolution for you.
-import heroImage from '@/assets/Cyanotype.png'
-import { computed } from 'vue';
-import { useLocale } from '../compose/UseLocale';
 
-const { t, locale, setLocale, available } = useLocale()
-
-interface LinkItem {
-    label: string
-    href: string
-}
-
-const links = computed<LinkItem[]>(() => [
-  { label: t.value.links.email, href: 'mailto:jane@example.com' },
-  { label: t.value.links.about, href: 'https://github.com/janedoe' },
-  { label: t.value.links.work, href: 'https://linkedin.com/in/janedoe' },
-  { label: t.value.links.blog, href: '/resume.pdf' },
-])
 </script>
 
 <style scoped>
