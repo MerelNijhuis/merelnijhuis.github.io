@@ -104,6 +104,8 @@ onUnmounted(() => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
+
+
 .poster {
   --paper: #efebe2;
   --ink: #696d8e;
@@ -119,7 +121,8 @@ onUnmounted(() => {
 /* ---------- LEFT: info column ---------- */
 .info {
   display: flex;
-  align-items: center;
+  align-items: flex-start;      /* was: center */
+  justify-content: flex-start;  /* explicit, though flex-start is already the default */
   padding: 5rem;
   padding-bottom: 8rem; /* leave room so fixed panel doesn't overlap content */
   min-width: 0;
@@ -279,10 +282,12 @@ onUnmounted(() => {
 }
 
 /* ---------- MOBILE ---------- */
-@media (max-width: 720px) {
+@media (max-width: 1000px) {
   .poster {
     grid-template-columns: 1fr;
     grid-template-rows: auto 3px auto;
+    align-content: start;  /* prevents rows from stretching — keeps top alignment */
+    min-height: 100vh;     /* restore this — guarantees background covers the screen */
   }
 
   .visual {
@@ -302,6 +307,8 @@ onUnmounted(() => {
   .info {
     padding: 9vw 7vw 5vw;
     padding-bottom: 8rem;
+    align-items: flex-start;      /* was: center */
+    justify-content: flex-start;  /* explicit, though flex-start is already the default */
   }
 
   .info_inner {
